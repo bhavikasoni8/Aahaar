@@ -1,12 +1,12 @@
 import express from 'express';
-import { addToCart, getCartDetails, removeFromCart, updateItemQuantity } from '../controller/cartController.js';
+import { addToCart, getCartDetails } from '../controllers/cartController.js';
 
 const router = express.Router()
 
 router
     .post('/add', addToCart)
-    .delete('/remove', removeFromCart)
+    // .delete('/remove', removeFromCart)
     .get('/:userId', getCartDetails)
-    .post('/update', updateItemQuantity)
+    // .post('/update', updateItemQuantity)
 
 export { router as cartRouter }

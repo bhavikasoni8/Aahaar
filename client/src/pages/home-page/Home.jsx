@@ -1,6 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../../components/header/Header'
 import './Home.css'
+import { useDispatch } from 'react-redux';
+import { fetchAllFoodItems } from '../../features/food/foodAction';
 
 function Home() {
 
@@ -10,7 +12,13 @@ function Home() {
     // const dishes = useSelector(state => state.food?.food || [])
     // const cartItems = useSelector(state => state.cart?.cart?.items || [])
 
-    // const dispatch = useDispatch();
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        // dispatch(getUserDetails());
+        dispatch(fetchAllFoodItems());
+        // dispatch(getCartDetails(userId));
+    }, [dispatch]);
 
     // useEffect(() => {
     //     dispatch(getUserDetails());
@@ -35,9 +43,9 @@ function Home() {
                     {/* <Header setIsSignUp={setIsSignUp} /> */}
                     <div className="banner_content">
                         <div className='banner_logo_name'>
-                    <i className="fa-solid fa-utensils"></i>
-                            
-                             </div>
+                            <i className="fa-solid fa-utensils"></i>
+
+                        </div>
                         <div className='banner_text'>Discover the best food around you</div>
                         {/* Search input */}
                         <div className="search_container">
