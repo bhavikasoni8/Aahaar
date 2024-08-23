@@ -47,7 +47,7 @@ export const getCartDetails = asyncHandler(async (req, res) => {
             throw new Error('Cart is empty');
         };
 
-        return res.status(200).json({ message: "Get all cart items", cart });
+        return res.status(200).json(cart);
     } catch (error) {
         console.log(error);
     }

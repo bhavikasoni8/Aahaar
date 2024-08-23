@@ -1,0 +1,84 @@
+#footer {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.row1,
+.row2 {}
+
+#footer .row1 {
+    width: 98%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 1rem 1rem 1rem 1.7rem;
+}
+
+#footer .row1 .col1 .contact {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    line-height: 14px;
+}
+
+#footer .row1 .col1 .socials {
+    margin-top: 1rem;
+    font-size: 20px;
+}
+
+#footer .row1 .col1 .socials i {
+    margin-right: 0.5rem;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+#footer .row1 .col1 .socials i:hover {
+    color: #31736f;
+}
+
+#footer .row1 .col1 p {
+    font-size: 14px;
+}
+
+
+#footer .col2,
+#footer .col3 {
+    display: flex;
+    flex-direction: column;
+}
+
+#footer .col2 a,
+#footer .col3 a {
+    text-decoration: none;
+    margin-bottom: 0.7rem;
+    font-size: 14px;
+    color: #1a1a1a;
+    transition: 0.1s;
+}
+
+#footer .col2 a:hover,
+#footer .col3 a:hover {
+    color: #31736f;
+}
+
+#footer .row1 .col4 p {
+    font-size: 14px;
+}
+
+#footer .row1 .col4 .app img {
+    border: 2px solid #31736f;
+    border-radius: 5px;
+}
+
+#footer .row2 {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+#footer .row2 p {
+    font-size: 14px;
+}

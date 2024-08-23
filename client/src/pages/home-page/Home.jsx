@@ -1,37 +1,43 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Header from '../../components/header/Header'
 import './Home.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllFoodItems } from '../../features/food/foodAction';
+import Card from '../../components/card/Card';
+import { fetchCartDetails } from '../../features/cart/cartAction';
+import Footer from '../../components/footer/Footer';
+import { AuthContext } from '../../context/AuthContext';
 
 function Home() {
 
-    // const { setIsSignUp, showAuthOverlay } = useContext(AuthContext)
+    const { setIsSignUp, showAuthOverlay } = useContext(AuthContext)
     // const authState = useSelector(state => state.auth)
     // const userId = authState?.user?._id;
-    // const dishes = useSelector(state => state.food?.food || [])
-    // const cartItems = useSelector(state => state.cart?.cart?.items || [])
+    const userId = "668308cc2fc22f81a5c05575";
+    const dishes = useSelector(state => state.food?.food || [])
+    const cartItems = useSelector(state => state.cart?.cart?.items || [])
+    console.log({ dishes });
 
 
     const dispatch = useDispatch();
     useEffect(() => {
         // dispatch(getUserDetails());
         dispatch(fetchAllFoodItems());
-        // dispatch(getCartDetails(userId));
-    }, [dispatch]);
+        dispatch(fetchCartDetails(userId));
+    }, [dispatch, userId]);
 
     // useEffect(() => {
     //     dispatch(getUserDetails());
-    //     dispatch(fetchAllFood());
-    //     dispatch(getCartDetails(userId));
+    //     dispatch(fetchAllFoodItems());
+    //     dispatch(fetchCartDetails(userId));
     // }, [dispatch,userId]);
 
-    // const handleAddToCart = (dish) => {
-    //     const userId = authState?.user._id
-    //     const { _id: foodId, price } = dish
-    //     const quantity = 1;
-    //     dispatch(addToCart({ userId, foodId, quantity, price }))
-    // }
+    const handleAddToCart = (dish) => {
+        // const userId = authState?.user._id
+        const { _id: foodId, price } = dish
+        const quantity = 1;
+        // dispatch(addToCart({ userId, foodId, quantity, price }))
+    }
 
     return (
         <>
@@ -56,39 +62,24 @@ function Home() {
                 </div>
 
                 {/* dishes */}
-                <div className="home_dish_explore">
-                    <div className="explore_heading">
-                        <div className="heading">Explore Our Menu</div>
-                        <p>Deliciousness Delivered: Your Favorite Meals, Just a Tap Away!</p>
-                    </div>
-
-                    <div className="display_dishes_container">
+                <div className="dish_explore_wrapper">
+                    <div className="dish_explore_inner">
+                        <div className="explore_heading">
+                            <div className="heading">Explore Our Menu</div>
+                            <p>Deliciousness Delivered: Your Favorite Meals, Just a Tap Away!</p>
+                        </div>
                         <div className="dishes_container">
-                            {/* {Array.isArray(dishes) && dishes.map((dish, index) => (
-
-                                <div className="food_card" key={index}>
-                                    <div className="img_container">
-                                        <img src={dish.image} alt="" />
-                                    </div>
-                                    <div className="dish_info">
-                                        <div className="title">{dish.title}</div>
-                                        <div className="categories">
-                                            {dish.categories.map((category, index) => (
-                                                <p key={index}>{category},</p>
-                                            ))}...</div>
-                                    </div>
-                                    <div className="dish_order">
-                                        <div className="update"><button type='button' onClick={() => handleAddToCart(dish)} className={`${cartItems.some(item => item.foodId === dish._id) ? 'disabled' : ''}`}>
-                                            {cartItems.some(item => item.foodId === dish._id) ? 'Added' : 'Add to cart'}
-                                        </button></div>
-                                    </div>
-                                </div>
-                            ))} */}
+                            {/* <div className="dishes_container"> */}
+                            {Array.isArray(dishes) && dishes.map((dish, index) => (
+                                <Card key={index} dish={dish} handleAddToCart={handleAddToCart} cartItems={cartItems} />
+                            ))}
+                            {/* </div> */}
                         </div>
                     </div>
                 </div>
 
                 {/* <Footer /> */}
+                <Footer />
             </div >
         </>
     )

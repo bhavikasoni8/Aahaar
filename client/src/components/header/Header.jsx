@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import styles from './Header.css';
 import { useDispatch, useSelector } from 'react-redux';
 // import { logout } from '../../features/auth/authSlice';
-// import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 // import { AuthContext } from '../../context/AuthContext';
 
 function Header({ setIsSignUp }) {
@@ -25,8 +25,8 @@ function Header({ setIsSignUp }) {
     //     }
     //   }, [cartItems, isLoading])
 
-    //   const dispatch = useDispatch();
-    //   const navigate = useNavigate();
+      const dispatch = useDispatch();
+      const navigate = useNavigate();
 
     //   const handleLogout = () => {
     //     dispatch(logout())
@@ -36,21 +36,19 @@ function Header({ setIsSignUp }) {
     //     setDropdown(!dropdown)
     //   }
 
-      const handleClick = () => {
+    const handleClick = () => {
         // setShowAuthOverlay(true)
         // setIsSignUp(false)
-      }
+    }
 
     return (
         <header className="header_wrapper">
             <nav className="nav_wrapper">
-                {/* <div className="header_leftmost_space"></div> */}
 
                 {/* Logo */}
                 <div className="nav_left">
-                आहार
-                    {/* <i className="fa-solid fa-utensils"></i> */}
-                    {/* <div className="home_link" onClick={() => { navigate('/') }}>Home</div> */}
+                    आहार
+                    <div className="home_link" onClick={() => { navigate('/') }}>Home</div>
                 </div>
 
                 {/* Log in & Sign up */}
@@ -65,17 +63,17 @@ function Header({ setIsSignUp }) {
                                         // setShowAuthOverlay(true)
                                         // setIsSignUp(true)
                                     }}>Sign up</li>
-                                    </>
+                                </>
                                 : <>
                                     <div className="user"
                                     //  onClick={handleUserInfo}
-                                     >
+                                    >
                                         <div className="user_represent">
                                             <i className="fa-regular fa-user"></i>
                                             <div className="username">
                                                 user
                                                 {/* {user?.username} */}
-                                                </div>
+                                            </div>
                                             <i className={`fa-solid fa-angle-down ${dropdown ? 'rotated' : ''}`}></i>
                                         </div>
                                         <div className={`user_options ${!dropdown ? 'hidden' : ""}`}>
@@ -83,7 +81,7 @@ function Header({ setIsSignUp }) {
                                                 <li>Profile</li>
                                                 <li>Notifications</li>
                                                 <li>Bookmarks</li>
-                                                <li 
+                                                <li
                                                 // onClick={handleLogout}
                                                 >Logout</li>
                                             </ul>
