@@ -12,7 +12,7 @@ function Card({ dish, handleAddToCart, cartItems }) {
                     <div className="dish_info">
                         <div className="dish_title_rating">
                             <div className="title">{dish.title} </div>
-                            <div className="rating">4.6 <i class="fa-solid fa-star"></i></div>
+                            <div className="rating">4.6 <i className="fa-solid fa-star"></i></div>
                         </div>
                         <div className="categories">
                             {dish.categories.map((category, index) => (

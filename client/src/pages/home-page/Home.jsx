@@ -7,6 +7,7 @@ import Card from '../../components/card/Card';
 import { fetchCartDetails } from '../../features/cart/cartAction';
 import Footer from '../../components/footer/Footer';
 import { AuthContext } from '../../context/AuthContext';
+import Auth from '../../components/Auth/Auth';
 
 function Home() {
 
@@ -16,21 +17,16 @@ function Home() {
     const userId = "668308cc2fc22f81a5c05575";
     const dishes = useSelector(state => state.food?.food || [])
     const cartItems = useSelector(state => state.cart?.cart?.items || [])
-    console.log({ dishes });
+    // console.log({ dishes });
 
 
     const dispatch = useDispatch();
+
     useEffect(() => {
         // dispatch(getUserDetails());
         dispatch(fetchAllFoodItems());
         dispatch(fetchCartDetails(userId));
-    }, [dispatch, userId]);
-
-    // useEffect(() => {
-    //     dispatch(getUserDetails());
-    //     dispatch(fetchAllFoodItems());
-    //     dispatch(fetchCartDetails(userId));
-    // }, [dispatch,userId]);
+    }, [dispatch,userId]);
 
     const handleAddToCart = (dish) => {
         // const userId = authState?.user._id
@@ -39,18 +35,20 @@ function Home() {
         // dispatch(addToCart({ userId, foodId, quantity, price }))
     }
 
+    console.log(showAuthOverlay);
+    
+
     return (
         <>
+            {showAuthOverlay ? <Auth /> : <></>}
             {/* {showAuthOverlay ? <Auth authState={authState} /> : <></>} */}
             <div className='home'>
                 {/* banner */}
                 <div className="home_banner">
-                    <Header />
-                    {/* <Header setIsSignUp={setIsSignUp} /> */}
+                    <Header setIsSignUp={setIsSignUp} />
                     <div className="banner_content">
                         <div className='banner_logo_name'>
                             <i className="fa-solid fa-utensils"></i>
-
                         </div>
                         <div className='banner_text'>Discover the best food around you</div>
                         {/* Search input */}
@@ -69,11 +67,9 @@ function Home() {
                             <p>Deliciousness Delivered: Your Favorite Meals, Just a Tap Away!</p>
                         </div>
                         <div className="dishes_container">
-                            {/* <div className="dishes_container"> */}
                             {Array.isArray(dishes) && dishes.map((dish, index) => (
                                 <Card key={index} dish={dish} handleAddToCart={handleAddToCart} cartItems={cartItems} />
                             ))}
-                            {/* </div> */}
                         </div>
                     </div>
                 </div>

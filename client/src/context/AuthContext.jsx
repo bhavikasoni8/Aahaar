@@ -1,6 +1,11 @@
 import { createContext, useState } from "react";
 
-export const AuthContext = createContext({});
+export const AuthContext = createContext({
+    isSignUp: false,
+    setIsSignUp: () => { },
+    showAuthOverlay: false,
+    setShowAuthOverlay: () => { },
+});
 
 export const AuthContextProvider = ({ children }) => {
     const [isSignUp, setIsSignUp] = useState(false);

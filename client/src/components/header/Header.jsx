@@ -1,18 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
-import styles from './Header.css';
+import React, { useContext,  useState } from 'react';
+import  './Header.css';
 import { useDispatch, useSelector } from 'react-redux';
 // import { logout } from '../../features/auth/authSlice';
 import { useNavigate, Link } from 'react-router-dom';
-// import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
+
 
 function Header({ setIsSignUp }) {
 
     const [dropdown, setDropdown] = useState(false);
     const [isCartEmpty, setIsCartEmpty] = useState(true)
 
-    //   const { setShowAuthOverlay } = useContext(AuthContext)
+    const { setShowAuthOverlay, showAuthOverlay } = useContext(AuthContext)
     //   const isLoading = useSelector(state => state.cart.loading)
-    //   const cartItems = useSelector(state => state.cart?.cart?.items || [])
+    const cartItems = useSelector(state => state.cart?.cart?.items || [])
     //   const { userToken, user, loading } = useSelector(state => state.auth)
     const { userToken } = useState(true)
     //   const token = localStorage.getItem('userToken') || null
@@ -25,8 +26,8 @@ function Header({ setIsSignUp }) {
     //     }
     //   }, [cartItems, isLoading])
 
-      const dispatch = useDispatch();
-      const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     //   const handleLogout = () => {
     //     dispatch(logout())
@@ -37,8 +38,8 @@ function Header({ setIsSignUp }) {
     //   }
 
     const handleClick = () => {
-        // setShowAuthOverlay(true)
-        // setIsSignUp(false)
+        setShowAuthOverlay(true)
+        setIsSignUp(false)
     }
 
     return (
@@ -54,14 +55,14 @@ function Header({ setIsSignUp }) {
                 {/* Log in & Sign up */}
                 <div className="nav_right">
                     <ul>
-                        {/* <Link to='/add-dish'><li>Add dishes</li></Link> */}
+                        <Link to='/add-dish'><li>Add dishes</li></Link>
                         {
                             !userToken ?
                                 <>
                                     <li onClick={handleClick}>Log in</li>
                                     <li onClick={() => {
-                                        // setShowAuthOverlay(true)
-                                        // setIsSignUp(true)
+                                        setShowAuthOverlay(true)
+                                        setIsSignUp(true)
                                     }}>Sign up</li>
                                 </>
                                 : <>
@@ -90,8 +91,8 @@ function Header({ setIsSignUp }) {
                                 </>
                         }
 
-                        {/* <div className="cart_link" onClick={() => navigate('/cart')}><i className="fa-solid fa-cart-shopping"></i>
-                            {!isCartEmpty && <span className='cart_count'>{cartItems?.length}</span>} </div> */}
+                        <div className="cart_link" onClick={() => navigate('/cart')}><i className="fa-solid fa-cart-shopping"></i>
+                            {!isCartEmpty && <span className='cart_count'>{cartItems?.length}</span>} </div>
                     </ul>
                 </div>
             </nav>
