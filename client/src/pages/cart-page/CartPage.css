@@ -1,0 +1,215 @@
+.cart_wrapper {
+    width: 100%;
+    height: 200vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f4f4f4;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.cart_container {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    gap: 2.5rem;
+}
+
+.cart_banner {
+    width: 100%;
+    background: rgb(239, 79, 95);
+    height: 4.35rem;
+    display: flex;
+    align-items: center;
+}
+
+.cart,
+.order_summary {
+    padding: 2rem;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 6px;
+}
+
+.cart_heading {
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+}
+
+.cart_empty {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.cart_items_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.cart .cart_items_container ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.cart .cart_items_container ul li {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #afafaf;
+    padding-bottom: 0.7rem;
+    margin-bottom: 1rem;
+}
+
+.categories_col {
+    justify-content: right;
+    font-size: 0.94rem;
+    color: #565959;
+}
+
+.cart .cart_items_container ul .food {
+    justify-content: space-between;
+}
+
+.food_item {
+    display: flex;
+    width: 80%;
+    align-items: flex-start;
+    margin-left: 1rem;
+    gap: 1rem;
+}
+
+.food .food_item .image_container {
+    width: 50%;
+    height: 100%;
+}
+
+.food .food_item img {
+    width: 100%;
+    height: 10rem;
+}
+
+.food .order_details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 97%;
+}
+
+.food .order_details .item_title {
+    font-size: 1.14rem;
+}
+
+.food .select_options {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+}
+
+.food .select_options .quantity {
+    border-radius: 2rem;
+    background: #fff;
+    padding: 0.3rem 0.6rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    gap: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.food .select_options .quantity .increment,
+.food .select_options .quantity .decrement {
+    border-radius: 50%;
+    padding: 5px 8px;
+    cursor: pointer;
+}
+
+.food .select_options .quantity .decrement {
+    color: red;
+    background: #f4c5c5;
+}
+
+.food .select_options .quantity .increment {
+    color: green;
+    background: #ade4ad;
+}
+
+.food .select_options .delete {
+    color: rgb(239, 79, 95);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.order_summary {
+    width: 35%;
+}
+
+.cart_total {
+    display: flex;
+    flex-direction: column;
+}
+
+.total_heading {
+    font-size: 1.3rem;
+    font-weight: 900;
+}
+
+.receipt {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    margin-top: 1.6rem;
+}
+
+.receipt_col {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    font-size: 0.95rem;
+    padding-bottom: 0.3rem;
+    color: #414040;
+}
+
+.total {
+    border-bottom: none;
+    font-weight: 900;
+    font-size: 1rem;
+}
+
+.decrement.disabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+}
+
+.checkout {
+    margin-top: 1.5rem;
+}
+
+.checkout button {
+    border: none;
+    padding: 0.5rem;
+    border-radius: 5px;
+    color: #fff;
+    background-color: rgb(239, 79, 95);
+    font-weight: 900;
+    cursor: pointer;
+    font-size: 1rem;
+}

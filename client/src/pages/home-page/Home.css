@@ -99,7 +99,8 @@
     align-items: center;
     margin-top: 2.4rem;
     gap: 3rem;
+    justify-content: center;
     padding-left: 2rrem;
     margin-left: 4.5rem;
-    margin-left: 18%;
+    /* margin-left: 18%; */
 }

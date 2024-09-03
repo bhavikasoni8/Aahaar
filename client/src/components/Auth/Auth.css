@@ -142,3 +142,17 @@
 .input_empty {
     border: 1px solid red
 }
+
+.auth_message {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.auth_message.success {
+    color: green;
+}
+
+.auth_message.error {
+    color: red;
+}

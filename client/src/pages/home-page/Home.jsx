@@ -12,9 +12,8 @@ import Auth from '../../components/Auth/Auth';
 function Home() {
 
     const { setIsSignUp, showAuthOverlay } = useContext(AuthContext)
-    // const authState = useSelector(state => state.auth)
-    // const userId = authState?.user?._id;
-    const userId = "668308cc2fc22f81a5c05575";
+    const authState = useSelector(state => state.auth)
+    const userId = authState?.user?._id;
     const dishes = useSelector(state => state.food?.food || [])
     const cartItems = useSelector(state => state.cart?.cart?.items || [])
     // console.log({ dishes });
@@ -24,9 +23,10 @@ function Home() {
 
     useEffect(() => {
         // dispatch(getUserDetails());
+        console.log(userId);
         dispatch(fetchAllFoodItems());
         dispatch(fetchCartDetails(userId));
-    }, [dispatch,userId]);
+    }, [dispatch, userId]);
 
     const handleAddToCart = (dish) => {
         // const userId = authState?.user._id
@@ -35,13 +35,9 @@ function Home() {
         // dispatch(addToCart({ userId, foodId, quantity, price }))
     }
 
-    console.log(showAuthOverlay);
-    
-
     return (
         <>
-            {showAuthOverlay ? <Auth /> : <></>}
-            {/* {showAuthOverlay ? <Auth authState={authState} /> : <></>} */}
+            {showAuthOverlay ? <Auth authState={authState} /> : <></>}
             <div className='home'>
                 {/* banner */}
                 <div className="home_banner">
@@ -75,7 +71,7 @@ function Home() {
                 </div>
 
                 {/* <Footer /> */}
-                <Footer />
+                {/* <Footer /> */}
             </div >
         </>
     )

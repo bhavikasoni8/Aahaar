@@ -1,22 +1,21 @@
-import React, { useContext,  useState } from 'react';
-import  './Header.css';
+import React, { useContext, useState, useEffect } from 'react';
+import './Header.css';
 import { useDispatch, useSelector } from 'react-redux';
-// import { logout } from '../../features/auth/authSlice';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-
+import { logout } from '../../features/auth/authSlice';
 
 function Header({ setIsSignUp }) {
 
     const [dropdown, setDropdown] = useState(false);
-    const [isCartEmpty, setIsCartEmpty] = useState(true)
+    const [isCartEmpty, setIsCartEmpty] = useState(true);
 
     const { setShowAuthOverlay, showAuthOverlay } = useContext(AuthContext)
-    //   const isLoading = useSelector(state => state.cart.loading)
+    const isLoading = useSelector(state => state.cart.loading)
     const cartItems = useSelector(state => state.cart?.cart?.items || [])
-    //   const { userToken, user, loading } = useSelector(state => state.auth)
-    const { userToken } = useState(true)
-    //   const token = localStorage.getItem('userToken') || null
+    const { accessToken, user, loading } = useSelector(state => state.auth)
+    // const { userToken } = useState(true)
+    const token = localStorage.getItem('accessToken') || null
 
     //   useEffect(() => {
     //     if (!isLoading && cartItems?.length > 0) {
@@ -29,13 +28,15 @@ function Header({ setIsSignUp }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    //   const handleLogout = () => {
-    //     dispatch(logout())
-    //   }
+    const handleLogout = () => {
+        dispatch(logout())
+    }
 
-    //   const handleUserInfo = () => {
-    //     setDropdown(!dropdown)
-    //   }
+
+
+    const handleDropdown = () => {
+        setDropdown(!dropdown)
+    }
 
     const handleClick = () => {
         setShowAuthOverlay(true)
@@ -54,10 +55,10 @@ function Header({ setIsSignUp }) {
 
                 {/* Log in & Sign up */}
                 <div className="nav_right">
-                    <ul>
+                    <ul className='nav_options'>
                         <Link to='/add-dish'><li>Add dishes</li></Link>
                         {
-                            !userToken ?
+                            !token ?
                                 <>
                                     <li onClick={handleClick}>Log in</li>
                                     <li onClick={() => {
@@ -67,23 +68,22 @@ function Header({ setIsSignUp }) {
                                 </>
                                 : <>
                                     <div className="user"
-                                    //  onClick={handleUserInfo}
+
                                     >
-                                        <div className="user_represent">
+                                        <div className="user_represent" onClick={handleDropdown}>
                                             <i className="fa-regular fa-user"></i>
                                             <div className="username">
-                                                user
-                                                {/* {user?.username} */}
+                                                {user?.username}
                                             </div>
                                             <i className={`fa-solid fa-angle-down ${dropdown ? 'rotated' : ''}`}></i>
                                         </div>
-                                        <div className={`user_options ${!dropdown ? 'hidden' : ""}`}>
+                                        <div className={`user_options ${!dropdown ? "hidden" : ""}`}>
                                             <ul>
                                                 <li>Profile</li>
                                                 <li>Notifications</li>
                                                 <li>Bookmarks</li>
                                                 <li
-                                                // onClick={handleLogout}
+                                                    onClick={handleLogout}
                                                 >Logout</li>
                                             </ul>
                                         </div>
@@ -98,6 +98,6 @@ function Header({ setIsSignUp }) {
             </nav>
         </header>
     )
-}
+};
 
-export default Header
+export default Header;
