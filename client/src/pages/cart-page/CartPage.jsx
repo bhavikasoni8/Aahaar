@@ -1,23 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './CartPage.css';
 import { fetchCartDetails } from '../../features/cart/cartAction';
 import Header from '../../components/header/Header';
+import { AuthContext } from '../../context/AuthContext';
 
 function CartPage() {
 
     const dispatch = useDispatch();
-    const userId = useSelector(state => state.auth);
+    const { setIsSignUp } = useContext(AuthContext)
+    const userId = useSelector(state => state.auth?.user?.user);
     const { cart, loading } = useSelector(state => state.cart);
 
+    console.log({ cart });
+
     useEffect(() => {
+
         dispatch(fetchCartDetails(userId));
     }, [dispatch, userId]);
 
     return (
         <div className='cart_wrapper'>
             <div className="cart_banner">
-                <Header />
+                <Header setIsSignUp={setIsSignUp} />
             </div>
             {loading ? (
                 <p>Loading...</p>
@@ -34,7 +39,7 @@ function CartPage() {
                         ) : (
                             <div className="cart_items_container">
                                 <ul>
-                                    {cart.map(item => (
+                                    {cart.items.map(item => (
                                         <li key={item.id} className="food">
                                             <div className="food_item">
                                                 <div className="image_container">
@@ -64,7 +69,7 @@ function CartPage() {
                             <div className="receipt">
                                 <div className="receipt_col">
                                     <span>Subtotal</span>
-                                    <span>${cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}</span>
+                                    {/* <span>${cart.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}</span> */}
                                 </div>
                                 <div className="receipt_col">
                                     <span>Shipping</span>
@@ -72,7 +77,7 @@ function CartPage() {
                                 </div>
                                 <div className="receipt_col total">
                                     <span>Total</span>
-                                    <span>${(cart.reduce((acc, item) => acc + item.price * item.quantity, 0) + 5.00).toFixed(2)}</span>
+                                    {/* <span>${(cart.reduce((acc, item) => acc + item.price * item.quantity, 0) + 5.00).toFixed(2)}</span> */}
                                 </div>
                             </div>
                             <div className="checkout">

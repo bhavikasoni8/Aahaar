@@ -4,35 +4,34 @@ import './Home.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllFoodItems } from '../../features/food/foodAction';
 import Card from '../../components/card/Card';
-import { fetchCartDetails } from '../../features/cart/cartAction';
+import { addToCart, fetchCartDetails } from '../../features/cart/cartAction';
 import Footer from '../../components/footer/Footer';
 import { AuthContext } from '../../context/AuthContext';
 import Auth from '../../components/Auth/Auth';
+import { getUserDetails } from '../../features/auth/authAction';
 
 function Home() {
 
     const { setIsSignUp, showAuthOverlay } = useContext(AuthContext)
     const authState = useSelector(state => state.auth)
-    const userId = authState?.user?._id;
+    const userId = authState?.user?.user?._id;
     const dishes = useSelector(state => state.food?.food || [])
     const cartItems = useSelector(state => state.cart?.cart?.items || [])
-    // console.log({ dishes });
-
-
     const dispatch = useDispatch();
+    console.log({ cartItems,dishes });
 
     useEffect(() => {
-        // dispatch(getUserDetails());
-        console.log(userId);
+        dispatch(getUserDetails());
         dispatch(fetchAllFoodItems());
         dispatch(fetchCartDetails(userId));
     }, [dispatch, userId]);
 
     const handleAddToCart = (dish) => {
-        // const userId = authState?.user._id
-        const { _id: foodId, price } = dish
+        const userId = authState?.user?.user._id;
+        const { _id: foodId, price } = dish;
         const quantity = 1;
-        // dispatch(addToCart({ userId, foodId, quantity, price }))
+        const foodData = { foodId, quantity, price, title: dish.title };
+        dispatch(addToCart({ userId, foodData }));
     }
 
     return (

@@ -16,7 +16,7 @@ const createToken = (id) => {
 }
 
 export const registerUser = asyncHandler(async (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     const { username, email, password } = req.body;
 
     try {
@@ -33,13 +33,13 @@ export const registerUser = asyncHandler(async (req, res) => {
         // }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await User.create({
+        const user = await User.create({
             username,
             email,
             password: hashedPassword
         })
         const token = createToken(newUser._id)
-        res.json({newUser, token})
+        res.json({ user, token })
 
     } catch (error) {
         console.log(error);
@@ -48,12 +48,12 @@ export const registerUser = asyncHandler(async (req, res) => {
 })
 
 export const loginUser = asyncHandler(async (req, res) => {
-    console.log("req.body: ", req.body)
+    // console.log("req.body: ", req.body)
     const { email, password } = req.body;
 
     try {
         const user = await User.findOne({ email })
-        console.log(user);
+        // console.log(user);
         if (!user) {
             return res.status(400).json({ success: false, message: "User does not exist" });
         }
@@ -72,12 +72,12 @@ export const loginUser = asyncHandler(async (req, res) => {
 })
 
 export const getUserDetails = asyncHandler(async (req, res) => {
-    const userId = req.user;
+    const userId = req.user.id;
     const token = req.token;
     if (!userId) {
         res.status(400).json({ message: "user id not recieved" })
     }
-    const user = await User.findOne({ _id: userId })
+    const user = await User.findById(userId)
     res.json({ user, token })
 });
 

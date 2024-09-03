@@ -18,13 +18,30 @@ export const loginUser = createAsyncThunk(
     'auth/login',
     async ({ email, password }, { rejectWithValue }) => {
         try {
-            console.log({ email, password });
             const response = await axios.post('http://localhost:8000/auth/login', { email, password })
-            localStorage.setItem("accessToken", response.data.token)
-            console.log(response.data);
+            localStorage.setItem("accessToken", response.data.accessToken)
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data)
         }
     }
 );
+
+export const getUserDetails = createAsyncThunk(
+    'auth/userDetails',
+    async (_, { rejectWithValue }) => {
+        try {
+            const token = localStorage.getItem('accessToken');
+            const response = await axios.get('http://localhost:8000/auth/userdetails', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            )
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+)
+

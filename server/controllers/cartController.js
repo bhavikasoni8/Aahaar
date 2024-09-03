@@ -1,10 +1,12 @@
 import asyncHandler from 'express-async-handler';
 import mongoose from 'mongoose';
 import User from '../models/User.js';
+import Food from '../models/Food.js';
 
 export const addToCart = asyncHandler(async (req, res, next) => {
     try {
-        const { foodData, userId } = req.body;
+        const { userId, foodData } = req.body;
+        console.log({ userId, foodData });
 
         // Validate userId
         if (!mongoose.Types.ObjectId.isValid(userId)) {
@@ -25,24 +27,24 @@ export const addToCart = asyncHandler(async (req, res, next) => {
 
         // Check if the item already exists in the cart
         const existingItemIndex = user.cart.items.findIndex(item => item.title === title);
+
         if (existingItemIndex > -1) {
+            // Update quantity and price of the existing item
             user.cart.items[existingItemIndex].quantity += quantity;
-            user.cart.items[existingItemIndex].price += price;
+            user.cart.items[existingItemIndex].price = price; // Ensure price is set correctly
         } else {
+            // Add new item with all required fields
             user.cart.items.push({ title, price, quantity });
         }
-
         // Update the total price
         user.cart.totalPrice += price * quantity;
-
-        // Save the updated user document
         await user.save();
-
         return res.status(200).json({ message: "Item added to cart", user });
     } catch (error) {
-        next(error); // Forward error to the error-handling middleware
+        next(error);
     }
 });
+
 
 export const getCartDetails = asyncHandler(async (req, res, next) => {
     try {
@@ -67,6 +69,6 @@ export const getCartDetails = asyncHandler(async (req, res, next) => {
 
         return res.status(200).json(cart);
     } catch (error) {
-        next(error); // Forward error to the error-handling middleware
+        next(error);
     }
 });

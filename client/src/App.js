@@ -3,6 +3,7 @@ import Home from './pages/home-page/Home';
 import './App.css';
 import { AuthContextProvider } from './context/AuthContext';
 import CartPage from './pages/cart-page/CartPage';
+import AddDish from './pages/seller/AddDish';
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/cart' element={<CartPage />} />
+            <Route path='/add-dish/*' element={<AddDish />} >
+            </Route>
           </Routes>
         </Router>
       </AuthContextProvider>

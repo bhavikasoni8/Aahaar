@@ -30,17 +30,15 @@ function Header({ setIsSignUp }) {
 
     const handleLogout = () => {
         dispatch(logout())
+        setDropdown(false)
     }
-
-
 
     const handleDropdown = () => {
         setDropdown(!dropdown)
     }
-
     const handleClick = () => {
-        setShowAuthOverlay(true)
         setIsSignUp(false)
+        setShowAuthOverlay(!showAuthOverlay)
     }
 
     return (
@@ -68,7 +66,6 @@ function Header({ setIsSignUp }) {
                                 </>
                                 : <>
                                     <div className="user"
-
                                     >
                                         <div className="user_represent" onClick={handleDropdown}>
                                             <i className="fa-regular fa-user"></i>
@@ -90,7 +87,6 @@ function Header({ setIsSignUp }) {
                                     </div>
                                 </>
                         }
-
                         <div className="cart_link" onClick={() => navigate('/cart')}><i className="fa-solid fa-cart-shopping"></i>
                             {!isCartEmpty && <span className='cart_count'>{cartItems?.length}</span>} </div>
                     </ul>

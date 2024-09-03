@@ -2,6 +2,8 @@ import React from 'react';
 import './Card.css'
 
 function Card({ dish, handleAddToCart, cartItems }) {
+    const isAddedToCart = cartItems.some((item) => String(item._id) == String(dish._id))
+
     return (
         <div className='card_wrapper'>
             <div className="card_wrapper_inner">
@@ -20,12 +22,14 @@ function Card({ dish, handleAddToCart, cartItems }) {
                             ))}...</div>
                     </div>
                     <div className="dish_order">
-                            <button type='button'
-                                onClick={() => handleAddToCart(dish)}
-                                className={`${cartItems.some(item => item.foodId === dish._id) ? 'disabled' : ''}`}
-                            >
-                                {cartItems.some(item => item.foodId === dish._id) ? 'Added' : 'Add to cart'}
-                            </button>
+                        <button
+                            type='button'
+                            onClick={() => handleAddToCart(dish)}
+                            className={isAddedToCart ? 'disabled' : ''}
+                            disabled={isAddedToCart} // Disable the button if already added to cart
+                        >
+                            {isAddedToCart ? 'Added' : 'Add to cart'}
+                        </button>
                     </div>
                 </div>
             </div>

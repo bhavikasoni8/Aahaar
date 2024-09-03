@@ -1,0 +1,142 @@
+/* CreateDish.css */
+
+.createDish_container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.image_container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.image {
+    position: relative;
+    max-width: 100%;
+    max-height: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.image_remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.image_remove button {
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.image_remove button:hover {
+    background: #ffdddd;
+}
+
+input[type="file"] {
+    display: block;
+    margin: 0 auto;
+}
+
+.title, .price, .description {
+    margin-bottom: 20px;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.category {
+    margin-bottom: 20px;
+}
+
+.category p {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.category_item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.category_item input {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.cancel_icon {
+    cursor: pointer;
+    color: #ff0000;
+}
+
+.cancel_icon i {
+    font-size: 18px;
+}
+
+button[type="button"] {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+.submit_btn {
+    text-align: center;
+}
+
+.submit_btn button {
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.submit_btn button:hover {
+    background-color: #218838;
+}
+
+.popup {
+    /* Styles for your Popup component */
+}

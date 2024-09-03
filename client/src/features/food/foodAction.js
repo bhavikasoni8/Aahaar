@@ -13,3 +13,6 @@ export const fetchAllFoodItems = createAsyncThunk(
         }
     }
 )
+
+export const deleteFood=createAsyncThunk()
+export const updateFood=createAsyncThunk()
